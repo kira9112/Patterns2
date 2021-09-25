@@ -1,11 +1,10 @@
-package ru.netology;
+package ru.netology.data;
 
 import com.github.javafaker.Faker;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
-
 
 
 import java.util.Locale;
@@ -17,17 +16,17 @@ public class DataGenerator {
 
     static Faker faker = new Faker(new Locale("ru"));
 
-    static DataName dataName(String status) {
+    public static DataName dataName(String status) {
 
         return new DataName(faker.name().lastName(), faker.internet().password(), status);
     }
 
-    static String noValidLog() {
+    public static String noValidLog() {
         String noValidLog = faker.name().username();
         return noValidLog;
     }
 
-    static String noValidPass() {
+    public static String noValidPass() {
         String noValidPass = faker.internet().password();
         return noValidPass;
     }
@@ -40,7 +39,7 @@ public class DataGenerator {
             .log(LogDetail.ALL)
             .build();
 
-    static void setUpAll(DataName user) {
+    public static void sendRequest(DataName user) {
         // сам запрос
         given() // "дано"
                 .spec(requestSpec) // указываем, какую спецификацию используем

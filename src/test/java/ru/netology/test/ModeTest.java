@@ -1,16 +1,17 @@
-package ru.netology;
+package ru.netology.test;
 
 
 import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.netology.data.DataGenerator;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 
-public class Tests {
+public class ModeTest {
 
     @BeforeEach
     void before() {
@@ -20,7 +21,7 @@ public class Tests {
     @Test
     void inputValidLogPasStatActive() {
         val user = DataGenerator.dataName("active");
-        DataGenerator.setUpAll(user);
+        DataGenerator.sendRequest(user);
         $("span[data-test-id='login'] input").setValue(user.getLogin());
         $("span[data-test-id='password'] input").setValue(user.getPassword());
         $("button[data-test-id='action-login']").click();
@@ -30,7 +31,7 @@ public class Tests {
     @Test
     void inputValidLogPasStatBlocked() {
         val user = DataGenerator.dataName("blocked");
-        DataGenerator.setUpAll(user);
+        DataGenerator.sendRequest(user);
         $("span[data-test-id='login'] input").setValue(user.getLogin());
         $("span[data-test-id='password'] input").setValue(user.getPassword());
         $("button[data-test-id='action-login']").click();
@@ -40,7 +41,7 @@ public class Tests {
     @Test
     void inputNo_Valid_LogValidPasStatActive() {
         val user = DataGenerator.dataName("active");
-        DataGenerator.setUpAll(user);
+        DataGenerator.sendRequest(user);
         $("span[data-test-id='login'] input").setValue(DataGenerator.noValidLog());
         $("span[data-test-id='password'] input").setValue(user.getPassword());
         $("button[data-test-id='action-login']").click();
@@ -49,7 +50,7 @@ public class Tests {
     @Test
     void inputValidLogNo_Valid_PasStatActive() {
         val user = DataGenerator.dataName("active");
-        DataGenerator.setUpAll(user);
+        DataGenerator.sendRequest(user);
         $("span[data-test-id='login'] input").setValue(user.getLogin());
         $("span[data-test-id='password'] input").setValue(DataGenerator.noValidPass());
         $("button[data-test-id='action-login']").click();
